@@ -1,0 +1,13 @@
+@import "~bootstrap/scss/bootstrap";
+$mainColor: rgb(254, 204, 0);
+$text:rgb(45,45,45);
+
+.navbar-light navbarWild{
+  color:$mainColor;
+}
+
+h1 {
+  color:$text;
+  font-size:2em;
+  padding:2%;
+}
