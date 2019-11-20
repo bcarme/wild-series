@@ -2,8 +2,8 @@
 $mainColor: rgb(254, 204, 0);
 $text:rgb(45,45,45);
 
-.navbar-light navbarWild{
-  color:$mainColor;
+.navbar{
+  background-color:$mainColor;
 }
 
 h1 {
@@ -11,3 +11,4 @@ h1 {
   font-size:2em;
   padding:2%;
 }
+
