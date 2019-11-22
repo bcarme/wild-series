@@ -31,6 +31,13 @@ class Program
      */
     private $poster;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Category")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $category_id;
+
+
     public function getId(): ?int
     {
         return $this->id;
@@ -68,6 +75,18 @@ class Program
     public function setPoster(?string $poster): self
     {
         $this->poster = $poster;
+
+        return $this;
+    }
+
+    public function getCategoryId(): ?int
+    {
+        return $this->category_id;
+    }
+
+    public function setCategoryId(int $category_id): self
+    {
+        $this->category_id = $category_id;
 
         return $this;
     }
