@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+{% block title %}{% endblock %}
+
+{% block body %}
+    <div class="container-fluid">
+        <h1>{{ category}}</h1>
+            <div class="row">
+
+    {% for program in programs %}
+        <div class="col-lg-4 mt-5 mb-5 d-flex justify-content-around">
+                <div class="card" style="width: 18rem;">
+                    <img class="card-img-top" src="{{program.poster}}" alt="{{ program.title }} poster">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ program.title }}</h5>
+                        <p class="card-text">{{ program.summary }}</p>
+                    </div>
+                </div>
+        </div>
+    {% endfor %}
+            </div>
+        </div>
+{% endblock %}
