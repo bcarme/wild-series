@@ -6,9 +6,13 @@
     <div class="media">
         <img class="align-self-start mr-3" src="{{program.poster}}" alt="{{ program.title }} poster">
         <div class="media-body">
-            <h1 class="mt-0">{{ program.title }}</h1>
+            <h1 class="mt-1 justify-content-center">{{ program.title }}</h1>
             <p>{{ program.summary }}</p>
             <p>Categorie : {{ program.category.name }}</p>
+
+            {% for season in seasons %}
+                <span class="badge badge-light"><a href="{{slug}}/saison{{  season.id }}">Saison {{ season.id }}</a></span>
+            {% endfor %}
         </div>
     </div>
 

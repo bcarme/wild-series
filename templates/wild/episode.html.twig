@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+{% block title %}{% endblock %}
+
+{% block body %}
+    <div class="container-fluid mt-2">
+
+     <div class="row ml-2 mr-2">
+         <h2>Saison de {{ slug }} </h2>
+
+    {% for episode in episodes %}
+        <ul>
+            <li><b>Episode n° {{ episode.number }} : {{  episode.title }}</b></li>
+            <p class="text-justify">{{ episode.synopsis }}</p>
+        </ul>
+    {% endfor %}
+          </div>
+        </div>
+{% endblock %}
