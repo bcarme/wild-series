@@ -107,13 +107,15 @@ class WildController extends AbstractController
         ]);
     }
 
-        /**
-         * @Route("/wild/show/{slug}/saison{season}",
-         *      methods={"GET"},
-         *      name="wild_episode")
-         * @return Response
-         */
-        public function showBySeason(string $slug, int $season):Response
+
+
+    /**
+     * @Route("/wild/show/{slug}/saison{season}/",
+     *      methods={"GET"},
+     *      name="wild_season")
+     * @return Response
+     */
+    public function showBySeason(string $slug, int $season):Response
     {
         if (!$season) {
             throw $this
@@ -133,16 +135,38 @@ class WildController extends AbstractController
         $episodes = $this->getDoctrine()
             ->getRepository(Episode::class)
             ->findBy(
-             ['season_id'=>$season]
+                ['season_id'=>$season]
             );
 
-
-        return $this->render('wild/episode.html.twig', [
+        return $this->render('wild/season.html.twig', [
             'program' => $program,
             'slug' => $slug,
             'seasons' => $seasons,
             'episodes' => $episodes,
         ]);
     }
+
+    /**
+     * @Route("/wild/show/{slug}/saison{season}/episode{episode}",
+     *      methods={"GET"},
+     *      name="wild_episode")
+     * @return Response
+     */
+    public function showEpisode(Episode $episode): Response
+    {
+
+        $season = $episode->getSeasonId();
+        $program = $season->getProgramId();
+
+        return $this->render('wild/episode.html.twig', [
+                'program' => $program,
+                'season' => $season,
+                'episode' => $episode
+            ]
+        );
+
+    }
+
+
     }
 

@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+{% block title %}{% endblock %}
+
+{% block body %}
+    <div class="container-fluid mt-2">
+
+     <div class="row ml-2 mr-2">
+          <h2>Saison de {{ program.title }}</h2>
+    {% for episode in episodes %}
+        <ul>
+            <li><b><a href="episode{{ episode.id }}">Episode n° {{ episode.number }} : {{  episode.title }}</a></b></li>
+            <p class="text-justify">{{ episode.synopsis | truncate(200, true) }}</p>
+        </ul>
+    {% endfor %}
+          </div>
+        </div>
+{% endblock %}

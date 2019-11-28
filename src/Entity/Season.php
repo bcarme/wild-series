@@ -39,6 +39,11 @@ class Season
      */
     private $episodes;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $seasonNumber;
+
     public function __construct()
     {
         $this->episodes = new ArrayCollection();
@@ -112,6 +117,18 @@ class Season
                 $episode->setSeasonId(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getSeasonNumber(): ?int
+    {
+        return $this->seasonNumber;
+    }
+
+    public function setSeasonNumber(int $seasonNumber): self
+    {
+        $this->seasonNumber = $seasonNumber;
 
         return $this;
     }

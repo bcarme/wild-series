@@ -11,13 +11,12 @@
             <p>Categorie : {{ program.category.name }}</p>
 
             {% for season in seasons %}
-                <span class="badge badge-light"><a href="{{slug}}/saison{{  season.id }}">Saison {{ season.id }}</a></span>
+                <span class="badge badge-light"><a href="{{slug}}/saison{{ season.id}}">Saison {{ season.seasonNumber }}</a></span>
             {% endfor %}
+
         </div>
     </div>
-
     <a href="{{ path('wild_index') }}">
         Retour à l'accueil
     </a>
-
 {% endblock %}
