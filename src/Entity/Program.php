@@ -37,6 +37,12 @@ class Program
      */
     private $seasons;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="programs")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $categories;
+
     public function __construct()
     {
         $this->seasons = new ArrayCollection();
@@ -109,6 +115,18 @@ class Program
                 $season->setProgramId(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCategories(): ?Category
+    {
+        return $this->categories;
+    }
+
+    public function setCategories(?Category $categories): self
+    {
+        $this->categories = $categories;
 
         return $this;
     }

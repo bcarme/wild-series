@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Formulaire Catégorie{% endblock %}
+
+{% block body %}
+    {{ form_start(form) }}
+    {{ form_row(form.name) }}
+    <button type="submit" name="btnSearch">ajouter</button>
+    {{ form_end(form) }}
+{% endblock %}
