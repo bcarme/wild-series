@@ -1,12 +1,15 @@
 <?php
+
 namespace App\Entity;
+
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+
 /**
- * @ORM\Entity(repositoryClass="App\Repository\CategoryRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\ActorRepository")
  */
-class Category
+class Actor
 {
     /**
      * @ORM\Id()
@@ -14,13 +17,14 @@ class Category
      * @ORM\Column(type="integer")
      */
     private $id;
+
     /**
-     * @ORM\Column(type="string", length=100)
+     * @ORM\Column(type="string", length=255)
      */
     private $name;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Program", mappedBy="category", orphanRemoval=true)
+     * @ORM\ManyToMany(targetEntity="App\Entity\Program", inversedBy="actors")
      */
     private $programs;
 
@@ -28,17 +32,21 @@ class Category
     {
         $this->programs = new ArrayCollection();
     }
+
     public function getId(): ?int
     {
         return $this->id;
     }
+
     public function getName(): ?string
     {
         return $this->name;
     }
+
     public function setName(string $name): self
     {
         $this->name = $name;
+
         return $this;
     }
 
@@ -54,7 +62,6 @@ class Category
     {
         if (!$this->programs->contains($program)) {
             $this->programs[] = $program;
-            $program->setCategories($this);
         }
 
         return $this;
@@ -64,10 +71,6 @@ class Category
     {
         if ($this->programs->contains($program)) {
             $this->programs->removeElement($program);
-            // set the owning side to null (unless already changed)
-            if ($program->getCategories() === $this) {
-                $program->setCategories(null);
-            }
         }
 
         return $this;

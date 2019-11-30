@@ -1,12 +1,9 @@
 <?php
-
 namespace App\Form;
-
 use App\Entity\Season;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-
 class SeasonType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -14,11 +11,10 @@ class SeasonType extends AbstractType
         $builder
             ->add('year')
             ->add('description')
-            ->add('seasonNumber')
-            ->add('program_id', null, ['choice_label' => 'title'])
+            ->add('number')
+            ->add('program', null, ['choice_label' => 'title'])
         ;
     }
-
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
