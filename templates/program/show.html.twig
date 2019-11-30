@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Program{% endblock %}
+
+{% block body %}
+<div class="container-fluid p-4">
+    <h1 class="mt-2">Série</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ program.id }}</td>
+            </tr>
+            <tr>
+                <th>Title</th>
+                <td>{{ program.title }}</td>
+            </tr>
+            <tr>
+                <th>Summary</th>
+                <td>{{ program.summary }}</td>
+            </tr>
+            <tr>
+                <th>Poster</th>
+                <td><img src="{{ program.poster }}" height="100"></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('program_index') }}">retour</a>
+
+    <a href="{{ path('program_edit', {'id': program.id}) }}">éditer</a>
+
+    {{ include('program/_delete_form.html.twig') }}
+</div>
+{% endblock %}

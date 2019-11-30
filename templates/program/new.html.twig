@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Program{% endblock %}
+
+{% block body %}
+<div class="container-fluid p-4">
+    <h1 class="mt-2">Nouvelle série</h1>
+
+    {{ include('program/_form.html.twig') }}
+
+    <a href="{{ path('program_index') }}">retour</a>
+</div>
+{% endblock %}

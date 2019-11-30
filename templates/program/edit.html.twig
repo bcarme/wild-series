@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Program{% endblock %}
+
+{% block body %}
+<div class="container-fluid p-4">
+    <h1 class="mt-2">Editer série</h1>
+
+    {{ include('program/_form.html.twig', {'button_label': 'éditer'}) }}
+    <a href="{{ path('program_index') }}">retour</a>
+
+    {{ include('program/_delete_form.html.twig') }}
+</div>
+{% endblock %}

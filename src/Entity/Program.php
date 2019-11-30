@@ -119,15 +119,4 @@ class Program
         return $this;
     }
 
-    public function getCategories(): ?Category
-    {
-        return $this->categories;
-    }
-
-    public function setCategories(?Category $categories): self
-    {
-        $this->categories = $categories;
-
-        return $this;
-    }
 }
