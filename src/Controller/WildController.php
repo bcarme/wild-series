@@ -5,6 +5,7 @@ use App\Entity\Category;
 use App\Entity\Episode;
 use App\Entity\Program;
 use App\Entity\Season;
+use App\Entity\Actor;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -180,6 +181,19 @@ class WildController extends AbstractController
 
     }
 
-
+    /**
+     * @param $name
+     * @Route("wild/actor/{name}", defaults={"name" = null}, name="show_actor")
+     * @return Response
+     */
+    public function showByActor(Actor $actor): Response
+    {
+        $program = $actor->getPrograms()->toArray();
+        return $this->render(("wild/actor.html.twig"), [
+            "actor" => $actor,
+            "programs" => $program,
+        ]);
     }
+
+}
 

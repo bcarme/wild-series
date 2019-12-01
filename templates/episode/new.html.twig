@@ -3,9 +3,11 @@
 {% block title %}New Episode{% endblock %}
 
 {% block body %}
-    <h1>Nouvel épisode</h1>
+    <div class="container-fluid">
+    <h1 class="mt-2">Nouvel épisode</h1>
 
     {{ include('episode/_form.html.twig') }}
 
     <a href="{{ path('episode_index') }}">retour</a>
+    </div>
 {% endblock %}

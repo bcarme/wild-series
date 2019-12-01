@@ -18,12 +18,10 @@ class Category
      * @ORM\Column(type="string", length=100)
      */
     private $name;
-
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Program", mappedBy="category", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\Program", mappedBy="categories", orphanRemoval=true)
      */
     private $programs;
-
     public function __construct()
     {
         $this->programs = new ArrayCollection();
@@ -41,7 +39,6 @@ class Category
         $this->name = $name;
         return $this;
     }
-
     /**
      * @return Collection|Program[]
      */
@@ -49,17 +46,14 @@ class Category
     {
         return $this->programs;
     }
-
     public function addProgram(Program $program): self
     {
         if (!$this->programs->contains($program)) {
             $this->programs[] = $program;
             $program->setCategories($this);
         }
-
         return $this;
     }
-
     public function removeProgram(Program $program): self
     {
         if ($this->programs->contains($program)) {
@@ -69,7 +63,6 @@ class Category
                 $program->setCategories(null);
             }
         }
-
         return $this;
     }
 }

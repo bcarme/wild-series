@@ -21,14 +21,14 @@ class Episode
      */
     private $number;
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="text", nullable=true)
      */
     private $synopsis;
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Season", inversedBy="episodes")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $season;
+    private $season_id;
     public function getId(): ?int
     {
         return $this->id;
@@ -55,18 +55,18 @@ class Episode
     {
         return $this->synopsis;
     }
-    public function setSynopsis(string $synopsis): self
+    public function setSynopsis(?string $synopsis): self
     {
         $this->synopsis = $synopsis;
         return $this;
     }
-    public function getSeason(): ?Season
+    public function getSeasonId(): ?Season
     {
-        return $this->season;
+        return $this->season_id;
     }
-    public function setSeason(?Season $season): self
+    public function setSeasonId(?Season $season_id): self
     {
-        $this->season = $season;
+        $this->season_id = $season_id;
         return $this;
     }
 }

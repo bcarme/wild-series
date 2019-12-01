@@ -1,8 +1,8 @@
 <?php
 namespace App\Entity;
-use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ProgramRepository")
  */
@@ -27,6 +27,10 @@ class Program
      */
     private $poster;
     /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Category")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="programs")
      * @ORM\JoinColumn(nullable=false)
      */
@@ -35,9 +39,34 @@ class Program
      * @ORM\OneToMany(targetEntity="App\Entity\Season", mappedBy="program", orphanRemoval=true)
      */
     private $seasons;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Actor", mappedBy="programs")
+     */
+    private $actors;
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getActors():Collection
+    {
+        return $this->actors;
+    }
+
+    /**
+     * @param ArrayCollection $actors
+     * @return Program
+     */
+    public function setActors(ArrayCollection $actors): Program
+    {
+        $this->actors = $actors;
+        return $this;
+    }
+
     public function __construct()
     {
         $this->seasons = new ArrayCollection();
+        $this->actors = new ArrayCollection();
     }
     public function getId(): ?int
     {

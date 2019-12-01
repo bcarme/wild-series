@@ -1,8 +1,8 @@
 <?php
 namespace App\Entity;
-use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\SeasonRepository")
  */
@@ -15,26 +15,26 @@ class Season
      */
     private $id;
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $year;
     /**
-     * @ORM\Column(type="text", nullable=true)
+     * @ORM\Column(type="text")
      */
     private $description;
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Program", inversedBy="seasons")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $program;
+    private $program_id;
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Episode", mappedBy="season", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\Episode", mappedBy="season_id", orphanRemoval=true)
      */
     private $episodes;
     /**
      * @ORM\Column(type="integer")
      */
-    private $number;
+    private $seasonNumber;
     public function __construct()
     {
         $this->episodes = new ArrayCollection();
@@ -47,7 +47,7 @@ class Season
     {
         return $this->year;
     }
-    public function setYear(int $year): self
+    public function setYear(?int $year): self
     {
         $this->year = $year;
         return $this;
@@ -56,18 +56,18 @@ class Season
     {
         return $this->description;
     }
-    public function setDescription(?string $description): self
+    public function setDescription(string $description): self
     {
         $this->description = $description;
         return $this;
     }
-    public function getProgram(): ?Program
+    public function getProgramId(): ?Program
     {
-        return $this->program;
+        return $this->program_id;
     }
-    public function setProgram(?Program $program): self
+    public function setProgramId(?Program $program_id): self
     {
-        $this->program = $program;
+        $this->program_id = $program_id;
         return $this;
     }
     /**
@@ -77,40 +77,33 @@ class Season
     {
         return $this->episodes;
     }
-    /**
-     * param Episode $episode
-     * @return Season
-     */
     public function addEpisode(Episode $episode): self
     {
         if (!$this->episodes->contains($episode)) {
             $this->episodes[] = $episode;
-            $episode->setSeason($this);
+            $episode->setSeasonId($this);
         }
         return $this;
     }
-    /**
-     * @param Program $program
-     * @return Category
-     */
     public function removeEpisode(Episode $episode): self
     {
-        if ($this->episodes>contains($episode)) {
+        if ($this->episodes->contains($episode)) {
             $this->episodes->removeElement($episode);
             // set the owning side to null (unless already changed)
-            if ($episode->getSeason() === $this) {
-                $episode->setSeason(null);
+            if ($episode->getSeasonId() === $this) {
+                $episode->setSeasonId(null);
             }
         }
         return $this;
     }
-    public function getNumber(): ?int
+    public function getSeasonNumber(): ?int
     {
-        return $this->number;
+        return $this->seasonNumber;
     }
-    public function setNumber(int $number): self
+    public function setSeasonNumber(int $seasonNumber): self
     {
-        $this->number = $number;
+        $this->seasonNumber = $seasonNumber;
         return $this;
     }
 }
+

@@ -4,7 +4,7 @@
 {% block body %}
 
     <div class="media">
-        <img class="align-self-start mr-3" src="{{program.poster}}" alt="{{ program.title }} poster">
+        <img class="align-self-start mr-3" src="{{program.poster}}" width ="600" alt="{{ program.title }} poster">
         <div class="media-body">
             <h1 class="mt-1 justify-content-center">{{ program.title }}</h1>
             <p>{{ program.summary }}</p>
@@ -13,7 +13,15 @@
             {% for season in seasons %}
                 <span class="badge badge-light"><a href="{{slug}}/saison{{ season.id}}">Saison {{ season.seasonNumber }}</a></span>
             {% endfor %}
-
+            <div>
+            <h3>Acteurs/Actrices  :</h3>
+            <ul>
+                {% for actor in program.actors %}
+                    <li> <a href="/wild/actor/{{ actor.name }}">{{ actor.name }}</a></li>
+                {% else %}
+                    <li>Aucun acteur pour cette série</li>
+                {% endfor %}
+            </ul>
         </div>
     </div>
     <a href="{{ path('wild_index') }}">
