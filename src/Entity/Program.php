@@ -26,10 +26,7 @@ class Program
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $poster;
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Category")
-     * @ORM\JoinColumn(nullable=false)
-     */
+
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="programs")
      * @ORM\JoinColumn(nullable=false)
@@ -131,6 +128,26 @@ class Program
                 $season->setProgram(null);
             }
         }
+        return $this;
+    }
+
+    public function addActor(Actor $actor): self
+    {
+        if (!$this->actors->contains($actor)) {
+            $this->actors[] = $actor;
+            $actor->addProgram($this);
+        }
+
+        return $this;
+    }
+
+    public function removeActor(Actor $actor): self
+    {
+        if ($this->actors->contains($actor)) {
+            $this->actors->removeElement($actor);
+            $actor->removeProgram($this);
+        }
+
         return $this;
     }
 }

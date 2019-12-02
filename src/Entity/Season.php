@@ -26,9 +26,9 @@ class Season
      * @ORM\ManyToOne(targetEntity="App\Entity\Program", inversedBy="seasons")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $program_id;
+    private $program;
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Episode", mappedBy="season_id", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\Episode", mappedBy="season", orphanRemoval=true)
      */
     private $episodes;
     /**
@@ -61,41 +61,7 @@ class Season
         $this->description = $description;
         return $this;
     }
-    public function getProgramId(): ?Program
-    {
-        return $this->program_id;
-    }
-    public function setProgramId(?Program $program_id): self
-    {
-        $this->program_id = $program_id;
-        return $this;
-    }
-    /**
-     * @return Collection|Episode[]
-     */
-    public function getEpisodes(): Collection
-    {
-        return $this->episodes;
-    }
-    public function addEpisode(Episode $episode): self
-    {
-        if (!$this->episodes->contains($episode)) {
-            $this->episodes[] = $episode;
-            $episode->setSeasonId($this);
-        }
-        return $this;
-    }
-    public function removeEpisode(Episode $episode): self
-    {
-        if ($this->episodes->contains($episode)) {
-            $this->episodes->removeElement($episode);
-            // set the owning side to null (unless already changed)
-            if ($episode->getSeasonId() === $this) {
-                $episode->setSeasonId(null);
-            }
-        }
-        return $this;
-    }
+
     public function getSeasonNumber(): ?int
     {
         return $this->seasonNumber;
@@ -103,6 +69,49 @@ class Season
     public function setSeasonNumber(int $seasonNumber): self
     {
         $this->seasonNumber = $seasonNumber;
+        return $this;
+    }
+
+    public function getProgram(): ?Program
+    {
+        return $this->program;
+    }
+
+    public function setProgram(?Program $program): self
+    {
+        $this->program = $program;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Episode[]
+     */
+    public function getEpisodes(): Collection
+    {
+        return $this->episodes;
+    }
+
+    public function addEpisode(Episode $episode): self
+    {
+        if (!$this->episodes->contains($episode)) {
+            $this->episodes[] = $episode;
+            $episode->setSeason($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEpisode(Episode $episode): self
+    {
+        if ($this->episodes->contains($episode)) {
+            $this->episodes->removeElement($episode);
+            // set the owning side to null (unless already changed)
+            if ($episode->getSeason() === $this) {
+                $episode->setSeason(null);
+            }
+        }
+
         return $this;
     }
 }
