@@ -19,9 +19,10 @@ class Category
      */
     private $name;
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Program", mappedBy="categories", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\Program", mappedBy="category", orphanRemoval=true)
      */
     private $programs;
+
     public function __construct()
     {
         $this->programs = new ArrayCollection();
