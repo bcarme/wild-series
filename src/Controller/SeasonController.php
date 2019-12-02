@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Program;
 use App\Entity\Season;
 use App\Form\SeasonType;
 use App\Repository\SeasonRepository;
@@ -53,7 +54,9 @@ class SeasonController extends AbstractController
      */
     public function show(Season $season): Response
     {
+        $program = $season->getProgramId();
         return $this->render('season/show.html.twig', [
+            'program' => $program,
             'season' => $season,
         ]);
     }

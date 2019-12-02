@@ -45,25 +45,7 @@ class Program
      */
     private $actors;
 
-    /**
-     * @return ArrayCollection
-     */
-    public function getActors():Collection
-    {
-        return $this->actors;
-    }
-
-    /**
-     * @param ArrayCollection $actors
-     * @return Program
-     */
-    public function setActors(ArrayCollection $actors): Program
-    {
-        $this->actors = $actors;
-        return $this;
-    }
-
-    public function __construct()
+     public function __construct()
     {
         $this->seasons = new ArrayCollection();
         $this->actors = new ArrayCollection();
@@ -133,4 +115,29 @@ class Program
         }
         return $this;
     }
+
+    /**
+     * @return Collection|Actor[]
+     */
+    public function getActors(): Collection
+    {
+        return $this->actors;
+    }
+    public function addActor(Actor $actor): self
+    {
+        if (!$this->actors->contains($actor)) {
+            $this->actors[] = $actor;
+            $actor->addProgram($this);
+        }
+        return $this;
+    }
+    public function removeActor(Actor $actor): self
+    {
+        if ($this->actors->contains($actor)) {
+            $this->actors->removeElement($actor);
+            $actor->removeProgram($this);
+        }
+        return $this;
+    }
+
 }
