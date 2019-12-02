@@ -17,6 +17,8 @@ class ProgramType extends AbstractType
             ->add('category', null, ['choice_label' => 'name']);
 
         $builder->add('actors', EntityType::class, [
+            ->add('category', null, ['choice_label' => 'name'])
+            ->add('actors', EntityType::class, [
             'class' => Actor::class,
             'choice_label' => 'name',
             'multiple' => true,

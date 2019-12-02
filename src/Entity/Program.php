@@ -26,10 +26,7 @@ class Program
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $poster;
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Category")
-     * @ORM\JoinColumn(nullable=false)
-     */
+
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="programs")
      * @ORM\JoinColumn(nullable=false)
@@ -123,6 +120,7 @@ class Program
     {
         return $this->actors;
     }
+
     public function addActor(Actor $actor): self
     {
         if (!$this->actors->contains($actor)) {
@@ -131,6 +129,7 @@ class Program
         }
         return $this;
     }
+
     public function removeActor(Actor $actor): self
     {
         if ($this->actors->contains($actor)) {

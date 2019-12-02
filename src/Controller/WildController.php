@@ -66,7 +66,7 @@ class WildController extends AbstractController
             ->findOneBy(['title' => mb_strtolower($slug)]);
         $seasons = $this->getDoctrine()
             ->getRepository(Season::class)
-            ->findBy(['program_id' => $program,
+            ->findBy(['program' => $program,
             ]);
 
         if (!$program) {
@@ -144,12 +144,12 @@ class WildController extends AbstractController
             ->findOneBy(['title' => mb_strtolower($slug)]);
         $seasons = $this->getDoctrine()
             ->getRepository(Season::class)
-            ->findBy(['program_id' => $program,
+            ->findBy(['program' => $program,
             ]);
         $episodes = $this->getDoctrine()
             ->getRepository(Episode::class)
             ->findBy(
-                ['season_id'=>$season]
+                ['season'=>$season]
             );
 
         return $this->render('wild/season.html.twig', [
