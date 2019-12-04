@@ -13,7 +13,7 @@ class EpisodeFixtures extends Fixture implements DependentFixtureInterface
     {
         $faker = Faker\Factory::create('fr_FR');
 
-        for ($i=0 ; $i<11 ; $i++){
+        for ($i=0 ; $i<25 ; $i++){
             $episode=new Episode();
             $episode->setTitle($faker->word());
             $episode->setNumber($faker->randomDigit);
