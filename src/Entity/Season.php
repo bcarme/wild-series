@@ -35,6 +35,8 @@ class Season
      * @ORM\Column(type="integer")
      */
     private $seasonNumber;
+
+
     public function __construct()
     {
         $this->episodes = new ArrayCollection();

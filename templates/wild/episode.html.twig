@@ -4,7 +4,7 @@
 {% block body %}
     <div class="container-fluid mt-2">
         <h1><a href="/wild/show/{{ program.title |replace({' ':'-'}) |lower }}"> {{ program.title }}</a></h1>
-        <h3><a href="/wild/show/{{ program.title |replace({' ':'-'}) |lower }}/saison{{ season.id }}">Saison n° {{ season.seasonNumber }}</a></h3>
+        <h3><a href="/wild/show/{{ program.slug }}/saison{{ season.id }}">Saison n° {{ season.seasonNumber }}</a></h3>
           <h5 class="font-weight-bold">Episode n° {{ episode.number }} : {{  episode.title }} </h5>
           <p class="text-justify">{{ episode.synopsis }}</p>
       </div>
