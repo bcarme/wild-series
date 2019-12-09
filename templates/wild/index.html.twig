@@ -6,7 +6,7 @@
     <h1>Toutes les séries de la table program : </h1>
     {% for program in programs %}
         <div>
-            <h2><a href="wild/show/{{program.title |replace({' ':'-'}) |lower }}">{{ loop.index }} / {{ program.title }}</h2>
+            <h2><a href="wild/show/{{program.slug}}">{{ loop.index }} / {{ program.title }}</h2>
             <a href="">Catégorie : {{ program.category.name }}</a>
             <p>{{ program.summary }}</p>
         </div>

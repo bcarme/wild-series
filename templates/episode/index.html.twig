@@ -24,8 +24,8 @@
                 <td>{{ episode.number }}</td>
                 <td>{{ episode.synopsis }}</td>
                 <td>
-                    <a href="{{ path('episode_show', {'id': episode.id}) }}"><span class="badge badge-secondary">afficher</span></a>
-                    <a href="{{ path('episode_edit', {'id': episode.id}) }}"><span class="badge badge-info">éditer</span></a>
+                    <a href="{{ path('episode_show', {'slug': episode.slug}) }}"><span class="badge badge-secondary">afficher</span></a>
+                    <a href="{{ path('episode_edit', {'slug': episode.slug}) }}"><span class="badge badge-info">éditer</span></a>
                 </td>
             </tr>
         {% else %}
