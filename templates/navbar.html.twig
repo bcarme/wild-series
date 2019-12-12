@@ -24,12 +24,12 @@
             <li class="nav-item">
                 <a class="nav-link" href="#">Mes favoris</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Connexion</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Inscription</a>
-            </li>
         </ul>
+        {% if app.user %}
+            {{ app.user.email }}
+            <a href="{{ path('app_logout') }}"> Se déconnecter</a>
+        {% else %}
+            <a href="{{ path('app_login') }}"> Se connecter</a>
+        {% endif %}
     </div>
 </nav>
