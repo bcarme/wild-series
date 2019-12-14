@@ -8,7 +8,7 @@
           <h2>Saison de {{ program.slug }}</h2>
     {% for episode in episodes %}
         <ul>
-            <li><b><a href="episode/{{ episode.slug }}">Episode n° {{ episode.number }} : {{  episode.title }}</a></b></li>
+            <li><b><a href="{{ path('wild_episode', {'id': episode.id })}}">Episode n° {{ episode.number }} : {{  episode.title }}</a></b></li>
             <p class="text-justify">{{ episode.synopsis | truncate(200, true) }}</p>
         </ul>
     {% endfor %}

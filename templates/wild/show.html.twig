@@ -11,7 +11,8 @@
             <p>Categorie : {{ program.category.name }}</p>
 
             {% for season in seasons %}
-                <span class="badge badge-light"><a href="{{slug}}/saison{{ season.id}}">Saison {{ season.seasonNumber }}</a></span>
+                <span class="badge badge-light"> <a href="{{ path('show_season', {'id' : season.id}) }}">Saison : {{ season.id }}</a>
+                </span>
             {% endfor %}
             <div>
             <h3>Acteurs/Actrices  :</h3>
