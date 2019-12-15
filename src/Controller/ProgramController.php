@@ -13,6 +13,8 @@ use Symfony\Component\Mime\Email;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
 /**
  * @Route("/program")
  */
@@ -43,6 +45,13 @@ class ProgramController extends AbstractController
             $program->setSlug($slug);
             $entityManager->persist($program);
             $entityManager->flush();
+            $email = (new Email())
+                ->from($this->getParameter('mailer_from'))
+                ->to($this->getParameter('mailer_from'))
+                ->subject('Une nouvelle série vient d\'être publiée !')
+                ->html($this->renderView('program/email_notification.html.twig',
+                    ['program' => $program]));
+            $mailer->send($email);
 
             $email = (new Email())
                 ->from($this->getParameter('mailer_from'))
@@ -59,6 +68,8 @@ class ProgramController extends AbstractController
             'program' => $program,
             'form' => $form->createView(),
         ]);
+
+
     }
 
     /**
@@ -106,5 +117,6 @@ class ProgramController extends AbstractController
 
         return $this->redirectToRoute('program_index');
     }
+
 
 }
