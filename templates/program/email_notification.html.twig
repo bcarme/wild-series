@@ -1,9 +1,8 @@
-{% block title %}Envoi d'email{% endblock %}
-
 {% block body %}
-    m<section>
-        <p>Bonjour, nous avons mis une nouvelle série sur notre site !</p>
-        <h4 style="background-color: yellow"> {{ program.title }}</h4>
-        <a href="http://127.0.0.1:8000/wild/show/{{ program.slug }}">Voir la page</a>
-    </section>
+<div style="background-color: rgb(254, 204, 0)">
+    <h1 >Ajout d'une nouvelle série sur Wild Series !</h1>
+
+    <p>Titre de la série : {{ program.title }}</p>
+    <a href="{{ url('wild_show', {'slug': program.slug} )  }}">Lien vers la série</a>
+</div>
 {% endblock %}

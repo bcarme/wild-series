@@ -8,6 +8,8 @@ use App\Entity\Actor;
 use App\Form\ProgramType;
 use App\Repository\ProgramRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -47,6 +49,14 @@ class ProgramController extends AbstractController
                 ->from($this->getParameter('mailer_from'))
                 ->to($this->getParameter('mailer_from'))
                 ->subject('Une nouvelle série vient d\'être publiée !')
+                ->html($this->renderView('program/email_notification.html.twig',
+                    ['program' => $program]));
+            $mailer->send($email);
+
+            $email = (new Email())
+                ->from($this->getParameter('mailer_from'))
+                ->to($this->getParameter('mailer_from'))
+                ->subject('WS :une nouvelle série vient d\'être publiée !')
                 ->html($this->renderView('program/email_notification.html.twig',
                     ['program' => $program]));
             $mailer->send($email);
