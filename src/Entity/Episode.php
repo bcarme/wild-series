@@ -39,7 +39,7 @@ class Episode
     private $slug;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="episode", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="episode")
      */
     private $comments;
 
@@ -140,7 +140,5 @@ class Episode
 
         return $this;
     }
-
-
 
 }

@@ -31,6 +31,25 @@
 
         <a href="{{ path('episode_edit', {'slug': episode.slug}) }}">éditer</a>
     </div>
-</div>
+
     {{ include('episode/_delete_form.html.twig') }}
+    <h3 class="mt-5 mb-2">Commentaires</h3>
+    {% if app.user %}
+        <div class="container mt-5">
+            <div class="row">
+                <div class="col-6">
+                 {{ include('comment/_form.html.twig') }}
+               </div>
+            </div>
+        </div>
+            {% endif %}
+    {% for comment in comments %}
+        <div class="jumbotron section mt-5">
+            <p class="text-secondary font-weight-bolder">Commentaires de {{ comment.author.email}}</p>
+            <p>{{ comment.comment }}</p>
+            <p>Note : {{ comment.rate }} </p>
+            <p>{{ comment.date|date('d/m/Y') }}</p>
+        </div>
+    {% endfor %}
+</div>
 {% endblock %}

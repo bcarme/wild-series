@@ -1,25 +1,23 @@
 <?php
 
 namespace App\DataFixtures;
-
 use App\Entity\User;
+use App\Entity\Comment;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
-use Doctrine\Common\DataFixtures\DependentFixtureInterface;
-use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class UserFixtures extends Fixture
 {
-    protected $faker;
     private $passwordEncoder;
 
-     public function __construct(UserPasswordEncoderInterface $passwordEncoder)
-     {
-         $this->passwordEncoder = $passwordEncoder;
-     }
+    public function __construct(UserPasswordEncoderInterface $passwordEncoder)
+    {
+        $this->passwordEncoder = $passwordEncoder;
+    }
 
-    public function load(ObjectManager $manager)
+
+    function load(ObjectManager $manager)
     {
         $subscriber = new User();
         $subscriber->setEmail('subscriber@monsite.com');
@@ -28,9 +26,10 @@ class UserFixtures extends Fixture
             $subscriber,
             'subscriberpassword'
         ));
-
+        $subscriber->setBio('fan');
+        $subscriber->setUsername('Bob45');
         $manager->persist($subscriber);
-
+dd($subscriber);
         // Création d’un utilisateur de type “administrateur”
         $admin = new User();
         $admin->setEmail('admin@monsite.com');
@@ -39,6 +38,8 @@ class UserFixtures extends Fixture
             $admin,
             'adminpassword'
         ));
+        $admin->setBio('admin');
+        $admin->setUsername('SuperAdmin');
 
         $manager->persist($admin);
 

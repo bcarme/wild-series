@@ -21,6 +21,7 @@
         "symfony/orm-pack": "*",
         "symfony/process": "4.3.*",
         "symfony/security-bundle": "4.3.*",
+        "symfony/serializer": "4.3.*",
         "symfony/serializer-pack": "*",
         "symfony/translation": "4.3.*",
         "symfony/twig-bundle": "4.3.*",
