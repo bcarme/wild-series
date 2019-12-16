@@ -4,35 +4,12 @@
 
 {% block body %}
 <div class="container-fluid p-4">
-    <h1 class="mt-2">Episode</h1>
-
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ episode.id }}</td>
-            </tr>
-            <tr>
-                <th>Title</th>
-                <td>{{ episode.title }}</td>
-            </tr>
-            <tr>
-                <th>Number</th>
-                <td>{{ episode.number }}</td>
-            </tr>
-            <tr>
-                <th>Synopsis</th>
-                <td>{{ episode.synopsis }}</td>
-            </tr>
-        </tbody>
-    </table>
-    <div class="container-fluid mt-2 mb-2">
+    <h1 class="mt-2">Episode {{ episode.number }}</h1>
+       <h3>{{ episode.title }}</h3>
+                <p>Synopsis</p>
+                <p>{{ episode.synopsis }}</p>
         <a href="{{ path('episode_index') }}">retour</a>
 
-        <a href="{{ path('episode_edit', {'slug': episode.slug}) }}">éditer</a>
-    </div>
-
-    {{ include('episode/_delete_form.html.twig') }}
     <h3 class="mt-5 mb-2">Commentaires</h3>
     {% if app.user %}
         <div class="container mt-5">
@@ -49,6 +26,11 @@
             <p>{{ comment.comment }}</p>
             <p>Note : {{ comment.rate }} </p>
             <p>{{ comment.date|date('d/m/Y') }}</p>
+            {% if comment.author %}
+                {% if  (app.user.email == comment.author.email) or (is_granted('ROLE_ADMIN')) %}
+                {{ include('comment/_delete_form.html.twig') }}
+                {% endif %}
+            {% endif %}
         </div>
     {% endfor %}
 </div>
