@@ -22,12 +22,10 @@ class Comment
     private $rate;
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="comments")
-     * @ORM\JoinColumn(nullable=false)
      */
     private $author;
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Episode", inversedBy="comments")
-     * @ORM\JoinColumn(nullable=false)
      */
     private $episode;
     /**

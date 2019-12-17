@@ -8,4 +8,25 @@
           <h5 class="font-weight-bold">Episode n° {{ episode.number }} : {{  episode.title }} </h5>
           <p class="text-justify">{{ episode.synopsis }}</p>
       </div>
+    <h3 class="mt-5 mb-2">Commentaires</h3>
+    {% if app.user %}
+        <div class="container mt-5">
+            <div class="row">
+                <div class="col-6">
+                    {{ include('comment/_form.html.twig') }}
+                </div>
+            </div>
+        </div>
+    {% endif %}
+    {% for comment in comments %}
+        <div class="jumbotron section mt-5">
+            <p class="text-secondary font-weight-bolder">Commentaires de {{ comment.author.email}}</p>
+            <p>{{ comment.comment }}</p>
+            <p>Note : {{ comment.rate }} </p>
+            <p>{{ comment.date|date('d/m/Y') }}</p>
+            {% if is_granted(ROLE_ADMIN) %}
+                <a href="{{ path('program_edit', { 'id': program.id} ) }}">Supprimer</a>
+            {%endif%}
+        </div>
+    {% endfor %}
 {% endblock %}
