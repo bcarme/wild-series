@@ -77,7 +77,7 @@ class SecurityController extends AbstractController
     }
 
     /**
-     * @Route("/account", name="app_account")
+     * @Route("/my-profile", name="app_account")
      * @IsGranted("ROLE_USER")
      */
     public function showMyAccount()

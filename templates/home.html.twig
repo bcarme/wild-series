@@ -2,4 +2,23 @@
 
 {% block body %}
     <h1>Bienvenue sur Wild Series</h1>
+    <h3>Les dernières séries</h3>
+    <div class="container-fluid">
+    <div class="row">
+    {% for program in programs %}
+
+                <div class="col-3">
+                    <div class="card" style="width: 18rem;">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ program.title  }}</h5>
+                            <p class="card-text">{{ program.summary | truncate(90, true) }}</p>
+
+                        </div>
+                        <a href="{{ path('wild_index') }}" class="btn btn-primary">Voir toutes les séries</a>
+                    </div>
+                </div>
+    {% endfor %}
+            </div>
+        </div>
+
 {% endblock %}
