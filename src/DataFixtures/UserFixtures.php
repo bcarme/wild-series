@@ -29,7 +29,7 @@ class UserFixtures extends Fixture
         $subscriber->setBio('fan');
         $subscriber->setUsername('Bob45');
         $manager->persist($subscriber);
-dd($subscriber);
+
         // Création d’un utilisateur de type “administrateur”
         $admin = new User();
         $admin->setEmail('admin@monsite.com');

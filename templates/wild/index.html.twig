@@ -3,13 +3,21 @@
 {% block title %}All programs{% endblock %}
 
 {% block body %}
+<div class="container-fluid m-4">
     <h1>Toutes les séries de la table program : </h1>
     {% for program in programs %}
         <div>
             <h2><a href="wild/show/{{program.slug}}">{{ loop.index }} / {{ program.title }}</h2>
             <a href="">Catégorie : {{ program.category.name }}</a>
             <p>{{ program.summary }}</p>
-        </div>
+            {% if program.actors is not empty %}
+                <p>{% for actor in program.actors %}
+                        {{ actor.name }},
+                    {% endfor %}</p>
+            {% else %}
+                <p>Pas d'acteur dans cette série</p>
+            {% endif %}
+        </p>
     {% else %}
         Aucune série trouvée.
     {% endfor %}
@@ -23,5 +31,6 @@
     <a href="{{ path('wild_index') }}">
         Testing index() method from WildController to view all programs.
     </a>
+        </div>
 {% endblock %}
 
