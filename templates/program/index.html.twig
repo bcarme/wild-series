@@ -13,6 +13,7 @@
                 <th>Title</th>
                 <th>Summary</th>
                 <th>Poster</th>
+                <th>Acteurs</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -23,6 +24,9 @@
                 <td>{{ program.title }}</td>
                 <td>{{ program.summary }}</td>
                 <td><img src="{{ program.poster }}" height="100"></td>
+                <td>{% for actor in program.actors %}
+                        {{ actor.name }},
+                    {% endfor %}</td>
                 <td>
                     <a href="{{ path('program_show', {'slug': program.slug}) }}"><span class="badge badge-secondary">afficher</span></a>
                     <a href="{{ path('program_edit', {'slug': program.slug}) }}"><span class="badge badge-info">éditer</span></a>
