@@ -2,6 +2,7 @@
 
 {% block body %}
     <h1>Bienvenue sur Wild Series</h1>
+
     <h3>Les dernières séries</h3>
     <div class="container-fluid">
     <div class="row">
@@ -19,6 +20,12 @@
                 </div>
     {% endfor %}
             </div>
+        <div class="container">
+            {{ form_start(form) }}
+            {{ form_widget(form) }}
+            <button>Rechercher</button>
+            {{ form_end(form) }}
+        </div>
         </div>
 
 {% endblock %}
